@@ -1,10 +1,6 @@
-const CACHE = 'popo-v1';
-const FILES = [
-  '/index.html',
-  '/manifest.json',
-  '/icon-192.png',
-  '/icon-512.png',
-];
+
+const CACHE = 'popo-v4';
+const FILES = ['/Popo/', '/Popo/index.html', '/Popo/manifest.json'];
 
 self.addEventListener('install', e => {
   e.waitUntil(caches.open(CACHE).then(c => c.addAll(FILES)));
