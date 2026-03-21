@@ -19,30 +19,21 @@
   --teal:#06d6a0;--teal2:#00b4d8;--teal3:#e0faf4;
   --yellow:#ffe66d;
   --dark:#2d1b33;--dark2:#5c3d66;--mid:#9b7aa8;--light:#f8f0fb;
+  --card-bg:white;--input-bg:white;--border:var(--pink3);
   --r:20px;--r2:14px;--r3:50px;
   --shadow:0 4px 24px rgba(45,27,51,0.12);
   --shadow2:0 8px 40px rgba(45,27,51,0.2);
 }
-body{
-  font-family:'Nunito',sans-serif;background:var(--light);color:var(--dark);
-  min-height:100dvh;padding-bottom:80px;
-  background-image:
-    radial-gradient(ellipse at 15% 10%,rgba(255,107,157,0.18) 0%,transparent 45%),
-    radial-gradient(ellipse at 85% 15%,rgba(199,125,255,0.15) 0%,transparent 40%),
-    radial-gradient(ellipse at 50% 90%,rgba(6,214,160,0.1) 0%,transparent 50%);
+body.dark{
+  --dark:#f0e6f6;--dark2:#d4b8e0;--mid:#a882b8;--light:#1a0f1e;
+  --card-bg:#2a1a30;--input-bg:#3a2040;--border:#5c3d66;
+  --shadow:0 4px 24px rgba(0,0,0,0.4);--shadow2:0 8px 40px rgba(0,0,0,0.5);
+  --pink3:#5c2040;--pink4:#3a1528;--purple3:#2d1a4a;--teal3:#0a2e28;--orange3:#2e1e00;
 }
-.tab-bar{
-  position:fixed;bottom:0;left:0;right:0;background:white;
-  border-top:2px solid var(--pink3);display:flex;z-index:50;
-  padding-bottom:env(safe-area-inset-bottom);
-  box-shadow:0 -4px 20px rgba(255,107,157,0.15);
-}
-.tab-btn{
-  flex:1;padding:0.7rem 0.3rem 0.5rem;border:none;background:none;cursor:pointer;
-  display:flex;flex-direction:column;align-items:center;gap:0.2rem;
-  font-family:'Nunito',sans-serif;font-size:0.62rem;font-weight:800;
-  color:var(--mid);transition:all 0.2s;letter-spacing:0.03em;text-transform:uppercase;
-}
+body{font-family:'Nunito',sans-serif;background:var(--light);color:var(--dark);min-height:100dvh;padding-bottom:80px;transition:background 0.3s,color 0.3s;background-image:radial-gradient(ellipse at 15% 10%,rgba(255,107,157,0.18) 0%,transparent 45%),radial-gradient(ellipse at 85% 15%,rgba(199,125,255,0.15) 0%,transparent 40%),radial-gradient(ellipse at 50% 90%,rgba(6,214,160,0.1) 0%,transparent 50%);}
+body.dark{background-image:radial-gradient(ellipse at 15% 10%,rgba(255,107,157,0.07) 0%,transparent 45%),radial-gradient(ellipse at 85% 15%,rgba(199,125,255,0.06) 0%,transparent 40%),radial-gradient(ellipse at 50% 90%,rgba(6,214,160,0.04) 0%,transparent 50%);}
+.tab-bar{position:fixed;bottom:0;left:0;right:0;background:var(--card-bg);border-top:2px solid var(--border);display:flex;z-index:50;padding-bottom:env(safe-area-inset-bottom);box-shadow:0 -4px 20px rgba(255,107,157,0.15);transition:background 0.3s,border-color 0.3s;}
+.tab-btn{flex:1;padding:0.7rem 0.3rem 0.5rem;border:none;background:none;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:0.2rem;font-family:'Nunito',sans-serif;font-size:0.62rem;font-weight:800;color:var(--mid);transition:all 0.2s;letter-spacing:0.03em;text-transform:uppercase;}
 .tab-btn .ti{font-size:1.35rem;transition:transform 0.2s;}
 .tab-btn.active{color:var(--pink2);}
 .tab-btn.active .ti{transform:scale(1.2);}
@@ -50,19 +41,16 @@ header{padding:1.5rem 1.2rem 0.3rem;display:flex;align-items:center;justify-cont
 .logo{font-family:'Fraunces',serif;font-size:2.2rem;color:var(--pink2);letter-spacing:-0.02em;line-height:1;}
 .logo em{font-style:italic;color:var(--purple2);}
 .tagline{font-size:0.7rem;color:var(--mid);font-weight:800;text-transform:uppercase;letter-spacing:0.1em;margin-top:0.1rem;}
-.notif-btn{width:42px;height:42px;border-radius:50%;background:white;border:2px solid var(--pink3);display:flex;align-items:center;justify-content:center;font-size:1.2rem;cursor:pointer;box-shadow:var(--shadow);position:relative;}
-.notif-dot{position:absolute;top:6px;right:6px;width:8px;height:8px;background:var(--pink2);border-radius:50%;border:2px solid white;}
+.header-actions{display:flex;gap:0.5rem;align-items:center;}
+.notif-btn,.dark-toggle{width:42px;height:42px;border-radius:50%;background:var(--card-bg);border:2px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:1.2rem;cursor:pointer;box-shadow:var(--shadow);transition:all 0.3s;}
+.notif-dot{position:absolute;top:6px;right:6px;width:8px;height:8px;background:var(--pink2);border-radius:50%;border:2px solid var(--card-bg);}
+.notif-btn{position:relative;}
 .page{display:none;animation:fi 0.3s ease;}
 .page.active{display:block;}
 @keyframes fi{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
 .grid{padding:0 1rem;display:grid;grid-template-columns:1fr 1fr;gap:1rem;}
 .full{grid-column:1/-1;}
-.phase-card{
-  background:linear-gradient(135deg,var(--pink2) 0%,var(--purple2) 100%);
-  border-radius:var(--r);padding:1.5rem;color:white;
-  display:flex;align-items:center;justify-content:space-between;
-  box-shadow:var(--shadow2);position:relative;overflow:hidden;
-}
+.phase-card{background:linear-gradient(135deg,var(--pink2) 0%,var(--purple2) 100%);border-radius:var(--r);padding:1.5rem;color:white;display:flex;align-items:center;justify-content:space-between;box-shadow:var(--shadow2);position:relative;overflow:hidden;}
 .phase-card::before{content:'';position:absolute;width:180px;height:180px;background:rgba(255,255,255,0.08);border-radius:50%;top:-60px;right:-40px;}
 .phase-card::after{content:'✦';position:absolute;font-size:4rem;opacity:0.07;bottom:-10px;left:20px;}
 .phase-badge{background:rgba(255,255,255,0.22);border-radius:50px;padding:0.25rem 0.75rem;font-size:0.68rem;font-weight:900;letter-spacing:0.05em;text-transform:uppercase;display:inline-block;margin-bottom:0.5rem;backdrop-filter:blur(4px);}
@@ -73,16 +61,16 @@ header{padding:1.5rem 1.2rem 0.3rem;display:flex;align-items:center;justify-cont
 .ring-text{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;font-family:'Fraunces',serif;}
 .ring-text .dn{font-size:1.75rem;font-weight:700;line-height:1;}
 .ring-text .dl{font-size:0.57rem;opacity:0.82;font-weight:800;text-transform:uppercase;letter-spacing:0.06em;}
-.card{background:white;border-radius:var(--r);padding:1.2rem;box-shadow:var(--shadow);transition:all 0.2s;}
+.card{background:var(--card-bg);border-radius:var(--r);padding:1.2rem;box-shadow:var(--shadow);transition:all 0.2s;}
 .card:active{transform:scale(0.985);}
 .card-title{font-family:'Fraunces',serif;font-size:1rem;color:var(--dark);margin-bottom:0.8rem;display:flex;align-items:center;gap:0.4rem;}
 .ctbadge{font-size:0.62rem;font-family:'Nunito',sans-serif;font-weight:900;background:var(--pink3);color:var(--pink2);padding:0.15rem 0.5rem;border-radius:50px;}
 .cal-nav{display:flex;align-items:center;justify-content:space-between;margin-bottom:0.8rem;}
 .cal-nav-btn{background:var(--pink3);border:none;width:32px;height:32px;border-radius:50%;cursor:pointer;font-size:1rem;color:var(--pink2);display:flex;align-items:center;justify-content:center;font-weight:900;}
-.cal-month{font-family:'Fraunces',serif;font-size:1rem;}
+.cal-month{font-family:'Fraunces',serif;font-size:1rem;color:var(--dark);}
 .cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:2px;}
 .cal-dn{text-align:center;font-size:0.58rem;font-weight:900;color:var(--mid);text-transform:uppercase;letter-spacing:0.04em;padding:0.25rem 0;}
-.cal-day{aspect-ratio:1;display:flex;align-items:center;justify-content:center;border-radius:50%;font-size:0.74rem;font-weight:700;cursor:pointer;position:relative;transition:all 0.15s;user-select:none;}
+.cal-day{aspect-ratio:1;display:flex;align-items:center;justify-content:center;border-radius:50%;font-size:0.74rem;font-weight:700;cursor:pointer;position:relative;transition:all 0.15s;user-select:none;color:var(--dark);}
 .cal-day:hover:not(.empty){background:var(--pink3);}
 .cal-day.empty{cursor:default;}
 .cal-day.today{font-weight:900;}
@@ -95,36 +83,29 @@ header{padding:1.5rem 1.2rem 0.3rem;display:flex;align-items:center;justify-cont
 .li{display:flex;align-items:center;gap:0.3rem;font-size:0.62rem;font-weight:800;color:var(--mid);}
 .ld{width:9px;height:9px;border-radius:50%;flex-shrink:0;}
 .flow-row{display:flex;gap:0.45rem;}
-.flow-btn{flex:1;padding:0.55rem 0.25rem;border-radius:var(--r2);border:2px solid var(--pink3);background:white;cursor:pointer;text-align:center;font-size:0.68rem;font-weight:800;color:var(--mid);transition:all 0.2s;font-family:'Nunito',sans-serif;}
+.flow-btn{flex:1;padding:0.55rem 0.25rem;border-radius:var(--r2);border:2px solid var(--border);background:var(--card-bg);cursor:pointer;text-align:center;font-size:0.68rem;font-weight:800;color:var(--mid);transition:all 0.2s;font-family:'Nunito',sans-serif;}
 .flow-btn span{font-size:0.95rem;display:block;margin-bottom:0.12rem;}
 .flow-btn.active{background:var(--pink3);border-color:var(--pink);color:var(--pink2);}
 .log-btn{width:100%;padding:0.82rem;background:linear-gradient(135deg,var(--pink2),var(--purple2));color:white;border:none;border-radius:var(--r3);font-size:0.9rem;font-weight:900;cursor:pointer;font-family:'Nunito',sans-serif;transition:all 0.2s;margin-top:0.8rem;box-shadow:0 4px 15px rgba(255,64,129,0.35);}
-.log-btn:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(255,64,129,0.45);}
+.log-btn:hover{transform:translateY(-2px);}
 .mood-row{display:flex;gap:0.3rem;justify-content:space-between;}
 .mood-btn{flex:1;aspect-ratio:1;border-radius:50%;border:2.5px solid transparent;background:var(--pink4);font-size:1.3rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all 0.2s;}
 .mood-btn:hover{transform:scale(1.12);}
 .mood-btn.active{border-color:var(--pink2);background:var(--pink3);transform:scale(1.12);}
 .sym-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:0.4rem;}
-.sym-btn{padding:0.5rem 0.2rem;border-radius:var(--r2);border:2px solid var(--pink3);background:white;cursor:pointer;text-align:center;font-size:0.66rem;font-weight:800;color:var(--mid);transition:all 0.2s;font-family:'Nunito',sans-serif;}
+.sym-btn{padding:0.5rem 0.2rem;border-radius:var(--r2);border:2px solid var(--border);background:var(--card-bg);cursor:pointer;text-align:center;font-size:0.66rem;font-weight:800;color:var(--mid);transition:all 0.2s;font-family:'Nunito',sans-serif;}
 .sym-btn .si{font-size:1rem;display:block;margin-bottom:0.12rem;}
-.sym-btn:hover{border-color:var(--pink);background:var(--pink4);}
 .sym-btn.ap{background:var(--pink3);border-color:var(--pink);color:var(--pink2);}
 .sym-btn.apu{background:var(--purple3);border-color:var(--purple);color:var(--purple2);}
 .sym-btn.at{background:var(--teal3);border-color:var(--teal);color:#028a6a;}
 .sym-btn.ao{background:var(--orange3);border-color:var(--orange);color:#c76b00;}
 .stats-grid{display:grid;grid-template-columns:1fr 1fr;gap:0.65rem;}
 .stat{border-radius:var(--r2);padding:0.85rem;text-align:center;}
-.sp{background:var(--pink3);}
-.spu{background:var(--purple3);}
-.st{background:var(--teal3);}
-.so{background:var(--orange3);}
+.sp{background:var(--pink3);}.spu{background:var(--purple3);}.st{background:var(--teal3);}.so{background:var(--orange3);}
 .stat-num{font-family:'Fraunces',serif;font-size:1.75rem;font-weight:700;line-height:1;}
-.sp .stat-num{color:var(--pink2);}
-.spu .stat-num{color:var(--purple2);}
-.st .stat-num{color:#028a6a;}
-.so .stat-num{color:#c76b00;}
+.sp .stat-num{color:var(--pink2);}.spu .stat-num{color:var(--purple2);}.st .stat-num{color:#028a6a;}.so .stat-num{color:#c76b00;}
 .stat-label{font-size:0.63rem;font-weight:900;text-transform:uppercase;letter-spacing:0.06em;color:var(--mid);margin-top:0.18rem;}
-.next-box{background:linear-gradient(135deg,var(--orange3),#fff8e0);border-radius:var(--r2);padding:0.85rem;border-left:3px solid var(--orange);margin-top:0.75rem;}
+.next-box{background:var(--orange3);border-radius:var(--r2);padding:0.85rem;border-left:3px solid var(--orange);margin-top:0.75rem;}
 .next-label{font-size:0.63rem;font-weight:900;text-transform:uppercase;letter-spacing:0.08em;color:var(--mid);}
 .next-val{font-family:'Fraunces',serif;font-size:1.05rem;color:var(--dark);margin-top:0.18rem;}
 .setting-row{margin-bottom:0.85rem;}
@@ -132,7 +113,7 @@ header{padding:1.5rem 1.2rem 0.3rem;display:flex;align-items:center;justify-cont
 input[type=range]{width:100%;accent-color:var(--pink2);}
 .rlabels{display:flex;justify-content:space-between;font-size:0.68rem;color:var(--mid);margin-top:0.1rem;font-weight:700;}
 .rval{color:var(--pink2);font-weight:900;}
-input[type=date]{width:100%;padding:0.55rem 0.75rem;border:2px solid var(--pink3);border-radius:var(--r2);font-family:'Nunito',sans-serif;color:var(--dark);background:white;font-size:0.83rem;font-weight:700;}
+input[type=date],input[type=text],input[type=password]{width:100%;padding:0.55rem 0.75rem;border:2px solid var(--border);border-radius:var(--r2);font-family:'Nunito',sans-serif;color:var(--dark);background:var(--input-bg);font-size:0.83rem;font-weight:700;}
 .section-title{font-family:'Fraunces',serif;font-size:1.3rem;color:var(--dark);padding:0.8rem 1rem 0.2rem;}
 .chart-wrap{position:relative;width:100%;height:175px;margin-top:0.4rem;}
 .history-list{margin-top:0.7rem;display:flex;flex-direction:column;gap:0.45rem;}
@@ -143,7 +124,7 @@ input[type=date]{width:100%;padding:0.55rem 0.75rem;border:2px solid var(--pink3
 .hsub{font-size:0.68rem;color:var(--mid);font-weight:600;}
 .notif-section{margin-bottom:0.9rem;}
 .notif-section-title{font-size:0.7rem;font-weight:900;text-transform:uppercase;letter-spacing:0.08em;color:var(--mid);margin-bottom:0.45rem;padding:0 1rem;}
-.notif-item{display:flex;align-items:center;justify-content:space-between;background:white;padding:0.85rem 1rem;border-radius:var(--r2);margin:0 0 0.35rem;box-shadow:var(--shadow);}
+.notif-item{display:flex;align-items:center;justify-content:space-between;background:var(--card-bg);padding:0.85rem 1rem;border-radius:var(--r2);margin:0 0 0.35rem;box-shadow:var(--shadow);}
 .nleft{display:flex;align-items:center;gap:0.65rem;}
 .nicon{font-size:1.25rem;}
 .nname{font-size:0.82rem;font-weight:800;color:var(--dark);}
@@ -154,22 +135,40 @@ input[type=date]{width:100%;padding:0.55rem 0.75rem;border:2px solid var(--pink3
 .tslider::before{content:'';position:absolute;width:19px;height:19px;background:white;border-radius:50%;top:3px;left:3px;transition:0.3s;box-shadow:0 2px 6px rgba(0,0,0,0.2);}
 .toggle input:checked+.tslider{background:linear-gradient(135deg,var(--pink),var(--purple2));}
 .toggle input:checked+.tslider::before{transform:translateX(19px);}
-.ntime{padding:0.38rem 0.65rem;border:2px solid var(--pink3);border-radius:50px;font-family:'Nunito',sans-serif;font-size:0.78rem;font-weight:700;color:var(--dark);background:var(--pink4);}
-.toast{position:fixed;bottom:5rem;left:50%;transform:translateX(-50%) translateY(20px);background:var(--dark);color:white;padding:0.65rem 1.3rem;border-radius:50px;font-size:0.8rem;font-weight:700;opacity:0;pointer-events:none;transition:all 0.3s;z-index:200;white-space:nowrap;}
+.ntime{padding:0.38rem 0.65rem;border:2px solid var(--border);border-radius:50px;font-family:'Nunito',sans-serif;font-size:0.78rem;font-weight:700;color:var(--dark);background:var(--pink4);}
+.toast{position:fixed;bottom:5rem;left:50%;transform:translateX(-50%) translateY(20px);background:var(--dark);color:var(--light);padding:0.65rem 1.3rem;border-radius:50px;font-size:0.8rem;font-weight:700;opacity:0;pointer-events:none;transition:all 0.3s;z-index:200;white-space:nowrap;}
 .toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
-.delay-banner{margin:0 1rem 0.8rem;background:linear-gradient(135deg,#fff3cd,#ffe8b0);border:2px solid var(--orange);border-radius:var(--r2);padding:0.85rem 1rem;display:flex;align-items:center;gap:0.7rem;animation:pulse-border 2s infinite;}
+.delay-banner{margin:0 1rem 0.8rem;background:linear-gradient(135deg,var(--orange3),#ffe8b0);border:2px solid var(--orange);border-radius:var(--r2);padding:0.85rem 1rem;display:flex;align-items:center;gap:0.7rem;animation:pulse-border 2s infinite;}
+body.dark .delay-banner{background:linear-gradient(135deg,#2e1e00,#3a2800);}
 .delay-banner .db-icon{font-size:1.6rem;flex-shrink:0;}
-.delay-banner .db-text{flex:1;}
 .delay-banner .db-title{font-weight:900;font-size:0.85rem;color:#7a4a00;}
+body.dark .delay-banner .db-title{color:#ffbf69;}
 .delay-banner .db-sub{font-size:0.73rem;color:#a06800;font-weight:700;margin-top:0.1rem;}
+body.dark .delay-banner .db-sub{color:#ff9f1c;}
 @keyframes pulse-border{0%,100%{border-color:var(--orange)}50%{border-color:#ff9f1c;box-shadow:0 0 0 3px rgba(255,159,28,0.2)}}
 .home-cal-wrap{padding:0 1rem 0.5rem;}
-.home-cal-mini{background:white;border-radius:var(--r);padding:1rem;box-shadow:var(--shadow);}
-.home-cal-mini .cal-nav{margin-bottom:0.6rem;}
-.cal-day.has-log::before{content:'';position:absolute;top:2px;right:2px;width:5px;height:5px;background:white;border-radius:50;opacity:0.9;}
-.log-detail-panel{background:var(--pink4);border-radius:var(--r2);padding:0.85rem;margin-top:0.7rem;border:2px solid var(--pink3);}
-.log-detail-title{font-size:0.72rem;font-weight:900;color:var(--pink2);text-transform:uppercase;letter-spacing:0.05em;margin-bottom:0.5rem;}
-.log-detail-row{display:flex;gap:0.4rem;align-items:center;flex-wrap:wrap;}
+.home-cal-mini{background:var(--card-bg);border-radius:var(--r);padding:1rem;box-shadow:var(--shadow);}
+/* IA */
+.ai-header{padding:1.2rem 1rem 0.8rem;background:linear-gradient(135deg,var(--purple2),var(--pink2));color:white;border-radius:0 0 var(--r) var(--r);margin-bottom:0.8rem;}
+.ai-header-title{font-family:'Fraunces',serif;font-size:1.3rem;margin-bottom:0.15rem;}
+.ai-header-sub{font-size:0.72rem;opacity:0.85;font-weight:700;}
+.ai-key-box{margin:0 1rem 0.8rem;background:var(--card-bg);border-radius:var(--r2);padding:1rem;box-shadow:var(--shadow);border:2px solid var(--purple3);}
+.ai-key-label{font-size:0.72rem;font-weight:900;color:var(--mid);text-transform:uppercase;letter-spacing:0.05em;margin-bottom:0.4rem;}
+.ai-key-row{display:flex;gap:0.5rem;}
+.ai-key-input{flex:1;padding:0.55rem 0.75rem;border:2px solid var(--border);border-radius:var(--r2);font-family:'Nunito',sans-serif;font-size:0.8rem;font-weight:700;color:var(--dark);background:var(--input-bg);}
+.ai-key-btn{padding:0.55rem 0.9rem;background:linear-gradient(135deg,var(--purple2),var(--pink2));color:white;border:none;border-radius:var(--r2);font-family:'Nunito',sans-serif;font-size:0.8rem;font-weight:900;cursor:pointer;}
+.ai-chat{padding:0 1rem;display:flex;flex-direction:column;gap:0.7rem;margin-bottom:0.7rem;max-height:45vh;overflow-y:auto;}
+.ai-msg{padding:0.8rem 1rem;border-radius:var(--r2);font-size:0.83rem;font-weight:600;line-height:1.55;max-width:88%;}
+.ai-msg.user{background:linear-gradient(135deg,var(--pink2),var(--purple2));color:white;align-self:flex-end;border-radius:var(--r2) var(--r2) 4px var(--r2);}
+.ai-msg.assistant{background:var(--card-bg);color:var(--dark);align-self:flex-start;box-shadow:var(--shadow);border-radius:4px var(--r2) var(--r2) var(--r2);}
+.ai-msg.thinking{opacity:0.6;font-style:italic;}
+.ai-input-row{padding:0 1rem 0.5rem;display:flex;gap:0.5rem;}
+.ai-input{flex:1;padding:0.7rem 1rem;border:2px solid var(--border);border-radius:var(--r3);font-family:'Nunito',sans-serif;font-size:0.85rem;font-weight:700;color:var(--dark);background:var(--card-bg);outline:none;}
+.ai-input:focus{border-color:var(--purple2);}
+.ai-send{width:44px;height:44px;border-radius:50%;background:linear-gradient(135deg,var(--purple2),var(--pink2));border:none;color:white;font-size:1.2rem;cursor:pointer;flex-shrink:0;}
+.ai-suggestions{padding:0 1rem 0.6rem;display:flex;gap:0.4rem;flex-wrap:wrap;}
+.ai-sug{padding:0.4rem 0.8rem;border-radius:50px;border:2px solid var(--purple3);background:var(--card-bg);font-family:'Nunito',sans-serif;font-size:0.72rem;font-weight:800;color:var(--purple2);cursor:pointer;transition:all 0.2s;white-space:nowrap;}
+.ai-sug:hover{background:var(--purple3);}
 </style>
 </head>
 <body>
@@ -179,22 +178,21 @@ input[type=date]{width:100%;padding:0.55rem 0.75rem;border:2px solid var(--pink3
     <div class="logo">Po<em>po</em></div>
     <div class="tagline">Suivi du cycle ✨</div>
   </div>
-  <button class="notif-btn" onclick="showPage('notifs')">🔔<span class="notif-dot"></span></button>
+  <div class="header-actions">
+    <button class="dark-toggle" id="darkToggle" onclick="toggleDark()">🌙</button>
+    <button class="notif-btn" onclick="showPage('notifs')">🔔<span class="notif-dot"></span></button>
+  </div>
 </header>
 
-<!-- PAGE ACCUEIL -->
+<!-- ACCUEIL -->
 <div class="page active" id="page-home">
-
-  <!-- Bannière retard de règles -->
   <div class="delay-banner" id="delayBanner" style="display:none">
     <div class="db-icon">⏰</div>
-    <div class="db-text">
+    <div>
       <div class="db-title">Tes règles sont en retard !</div>
-      <div class="db-sub" id="delayBannerSub">Prévues il y a X jours — tout va bien ? 💛</div>
+      <div class="db-sub" id="delayBannerSub"></div>
     </div>
   </div>
-
-  <!-- Mini calendrier accueil -->
   <div class="home-cal-wrap">
     <div class="home-cal-mini">
       <div class="cal-nav">
@@ -211,7 +209,6 @@ input[type=date]{width:100%;padding:0.55rem 0.75rem;border:2px solid var(--pink3
       </div>
     </div>
   </div>
-
   <div class="grid">
     <div class="phase-card full">
       <div class="phase-info">
@@ -227,7 +224,6 @@ input[type=date]{width:100%;padding:0.55rem 0.75rem;border:2px solid var(--pink3
         <div class="ring-text"><span class="dn" id="dayNum">—</span><span class="dl">Jour</span></div>
       </div>
     </div>
-
     <div class="card full">
       <div class="card-title">🩸 Flux aujourd'hui</div>
       <div class="flow-row">
@@ -238,7 +234,6 @@ input[type=date]{width:100%;padding:0.55rem 0.75rem;border:2px solid var(--pink3
       </div>
       <button class="log-btn" onclick="logToday()">💾 Enregistrer aujourd'hui</button>
     </div>
-
     <div class="card">
       <div class="card-title">💭 Humeur</div>
       <div class="mood-row">
@@ -249,7 +244,6 @@ input[type=date]{width:100%;padding:0.55rem 0.75rem;border:2px solid var(--pink3
         <button class="mood-btn" onclick="selMood(this)" data-mood="😤">😤</button>
       </div>
     </div>
-
     <div class="card">
       <div class="card-title">⚡ Énergie</div>
       <div class="mood-row" id="energyRow">
@@ -260,41 +254,6 @@ input[type=date]{width:100%;padding:0.55rem 0.75rem;border:2px solid var(--pink3
         <button class="mood-btn" onclick="selEnergy(this)" data-energy="🔥">🔥</button>
       </div>
     </div>
-
-    <div class="card full">
-      <div class="card-title">📊 Mon cycle <span class="ctbadge">Stats</span></div>
-      <div class="stats-grid">
-        <div class="stat sp"><div class="stat-num" id="s1">28</div><div class="stat-label">Durée cycle</div></div>
-        <div class="stat spu"><div class="stat-num" id="s2">5</div><div class="stat-label">Durée règles</div></div>
-        <div class="stat st"><div class="stat-num" id="s3">—</div><div class="stat-label">Jours restants</div></div>
-        <div class="stat so"><div class="stat-num" id="s4">—</div><div class="stat-label">Ovulation J.</div></div>
-      </div>
-      <div class="next-box">
-        <div class="next-label">🌸 Prochaines règles estimées</div>
-        <div class="next-val" id="nextDate">—</div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- PAGE CALENDRIER -->
-<div class="page" id="page-cal">
-  <div class="grid">
-    <div class="card full">
-      <div class="cal-nav">
-        <button class="cal-nav-btn" onclick="changeMonth(-1)">‹</button>
-        <span class="cal-month" id="calMonth"></span>
-        <button class="cal-nav-btn" onclick="changeMonth(1)">›</button>
-      </div>
-      <div class="cal-grid" id="calGrid"></div>
-      <div class="legend">
-        <div class="li"><div class="ld" style="background:linear-gradient(135deg,#ff6b9d,#ff4081)"></div>Règles</div>
-        <div class="li"><div class="ld" style="background:#ff9f1c"></div>Ovulation</div>
-        <div class="li"><div class="ld" style="background:rgba(6,214,160,0.4)"></div>Fertile</div>
-        <div class="li"><div class="ld" style="background:#ffd6e7;border:1.5px dashed #ff6b9d"></div>Prévu</div>
-      </div>
-    </div>
-
     <div class="card full">
       <div class="card-title">🌸 Symptômes du jour</div>
       <div class="sym-grid">
@@ -315,17 +274,79 @@ input[type=date]{width:100%;padding:0.55rem 0.75rem;border:2px solid var(--pink3
         <button class="sym-btn" onclick="tSym(this,'at')"><span class="si">💪</span>Sport</button>
       </div>
     </div>
-
     <div class="card full">
       <div class="card-title">📝 Note du jour</div>
       <textarea id="noteToday" placeholder="Comment tu te sens aujourd'hui ? 💬"
-        style="width:100%;padding:0.8rem;border:2px solid var(--pink3);border-radius:var(--r2);font-family:'Nunito',sans-serif;font-size:0.85rem;resize:none;height:90px;color:var(--dark);font-weight:600;outline:none;background:var(--pink4);"
+        style="width:100%;padding:0.8rem;border:2px solid var(--border);border-radius:var(--r2);font-family:'Nunito',sans-serif;font-size:0.85rem;resize:none;height:90px;color:var(--dark);font-weight:600;outline:none;background:var(--input-bg);"
         oninput="saveNote(this.value)"></textarea>
+    </div>
+    <div class="card full">
+      <div class="card-title">📊 Mon cycle <span class="ctbadge">Stats</span></div>
+      <div class="stats-grid">
+        <div class="stat sp"><div class="stat-num" id="s1">28</div><div class="stat-label">Durée cycle</div></div>
+        <div class="stat spu"><div class="stat-num" id="s2">5</div><div class="stat-label">Durée règles</div></div>
+        <div class="stat st"><div class="stat-num" id="s3">—</div><div class="stat-label">Jours restants</div></div>
+        <div class="stat so"><div class="stat-num" id="s4">—</div><div class="stat-label">Ovulation J.</div></div>
+      </div>
+      <div class="next-box">
+        <div class="next-label">🌸 Prochaines règles estimées</div>
+        <div class="next-val" id="nextDate">—</div>
+      </div>
     </div>
   </div>
 </div>
 
-<!-- PAGE GRAPHIQUES -->
+<!-- CALENDRIER -->
+<div class="page" id="page-cal">
+  <div class="grid">
+    <div class="card full">
+      <div class="cal-nav">
+        <button class="cal-nav-btn" onclick="changeMonth(-1)">‹</button>
+        <span class="cal-month" id="calMonth"></span>
+        <button class="cal-nav-btn" onclick="changeMonth(1)">›</button>
+      </div>
+      <div class="cal-grid" id="calGrid"></div>
+      <div class="legend">
+        <div class="li"><div class="ld" style="background:linear-gradient(135deg,#ff6b9d,#ff4081)"></div>Règles</div>
+        <div class="li"><div class="ld" style="background:#ff9f1c"></div>Ovulation</div>
+        <div class="li"><div class="ld" style="background:rgba(6,214,160,0.4)"></div>Fertile</div>
+        <div class="li"><div class="ld" style="background:#ffd6e7;border:1.5px dashed #ff6b9d"></div>Prévu</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- IA -->
+<div class="page" id="page-ai">
+  <div class="ai-header">
+    <div class="ai-header-title">✨ Popo IA</div>
+    <div class="ai-header-sub">Ton assistante cycle — powered by Claude AI</div>
+  </div>
+  <div class="ai-key-box" id="aiKeyBox">
+    <div class="ai-key-label">🔑 Clé API Anthropic</div>
+    <div class="ai-key-row">
+      <input type="password" class="ai-key-input" id="apiKeyInput" placeholder="sk-ant-api03-...">
+      <button class="ai-key-btn" onclick="saveApiKey()">✓ OK</button>
+    </div>
+    <div style="font-size:0.68rem;color:var(--mid);margin-top:0.4rem;font-weight:700;">💡 console.anthropic.com → API Keys → Create Key</div>
+  </div>
+  <div class="ai-suggestions">
+    <button class="ai-sug" onclick="sendSuggestion('📊 Analyse mon cycle')">📊 Analyse mon cycle</button>
+    <button class="ai-sug" onclick="sendSuggestion('🤕 Conseils pour mes crampes')">🤕 Crampes</button>
+    <button class="ai-sug" onclick="sendSuggestion('😴 Pourquoi je suis si fatiguée ?')">😴 Fatigue</button>
+    <button class="ai-sug" onclick="sendSuggestion('🍫 Pourquoi j\'ai des fringales ?')">🍫 Fringales</button>
+    <button class="ai-sug" onclick="sendSuggestion('💊 Quels conseils pour ma phase actuelle ?')">💊 Conseils phase</button>
+  </div>
+  <div class="ai-chat" id="aiChat">
+    <div class="ai-msg assistant">Bonjour ! 🌸 Je suis Popo IA, ton assistante cycle personnelle. Entre ta clé API ci-dessus pour commencer, puis pose-moi toutes tes questions !</div>
+  </div>
+  <div class="ai-input-row">
+    <input type="text" class="ai-input" id="aiInput" placeholder="Pose ta question..." onkeydown="if(event.key==='Enter')sendAI()">
+    <button class="ai-send" onclick="sendAI()">➤</button>
+  </div>
+</div>
+
+<!-- GRAPHIQUES -->
 <div class="page" id="page-charts">
   <div class="section-title">📈 Historique & Graphiques</div>
   <div class="grid">
@@ -344,11 +365,11 @@ input[type=date]{width:100%;padding:0.55rem 0.75rem;border:2px solid var(--pink3
   </div>
 </div>
 
-<!-- PAGE NOTIFICATIONS -->
+<!-- NOTIFICATIONS -->
 <div class="page" id="page-notifs">
   <div class="section-title">🔔 Rappels</div>
   <div style="background:linear-gradient(135deg,var(--pink3),var(--purple3));border-radius:var(--r);padding:1rem 1.2rem;margin:0 1rem 1rem;font-size:0.78rem;font-weight:700;color:var(--dark2);">
-    💡 Installe Popo sur ton écran d'accueil et autorise les notifications pour les recevoir.
+    💡 Active les notifications pour recevoir tes rappels sur Android.
   </div>
   <div class="notif-section">
     <div class="notif-section-title">🩸 Règles</div>
@@ -381,13 +402,6 @@ input[type=date]{width:100%;padding:0.55rem 0.75rem;border:2px solid var(--pink3
   <div class="notif-section">
     <div class="notif-section-title">💊 Bien-être</div>
     <div class="notif-item">
-      <div class="nleft"><span class="nicon">💊</span><div><div class="nname">Rappel pilule</div><div class="ndesc">Tous les jours à heure fixe</div></div></div>
-      <div style="display:flex;align-items:center;gap:0.5rem">
-        <input type="time" class="ntime" value="09:00">
-        <label class="toggle"><input type="checkbox" onchange="showToast('🔔 Sauvegardé !')"><span class="tslider"></span></label>
-      </div>
-    </div>
-    <div class="notif-item">
       <div class="nleft"><span class="nicon">🧘</span><div><div class="nname">Check-in bien-être</div><div class="ndesc">Humeur du soir</div></div></div>
       <div style="display:flex;align-items:center;gap:0.5rem">
         <input type="time" class="ntime" value="21:00">
@@ -398,7 +412,7 @@ input[type=date]{width:100%;padding:0.55rem 0.75rem;border:2px solid var(--pink3
   <div style="padding:0 1rem"><button class="log-btn" onclick="askNotifPerm()">🔔 Activer les notifications</button></div>
 </div>
 
-<!-- PAGE RÉGLAGES -->
+<!-- RÉGLAGES -->
 <div class="page" id="page-settings">
   <div class="section-title">⚙️ Réglages</div>
   <div class="grid">
@@ -423,12 +437,14 @@ input[type=date]{width:100%;padding:0.55rem 0.75rem;border:2px solid var(--pink3
       <div class="card-title">📊 Mes données</div>
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.6rem">
         <button onclick="exportData()" style="padding:0.72rem;background:var(--teal3);border:2px solid var(--teal);border-radius:var(--r2);font-family:'Nunito',sans-serif;font-size:0.8rem;font-weight:900;color:#028a6a;cursor:pointer;">📤 Exporter</button>
-        <button onclick="clearData()" style="padding:0.72rem;background:#fff0f0;border:2px solid #ffb3b3;border-radius:var(--r2);font-family:'Nunito',sans-serif;font-size:0.8rem;font-weight:900;color:#cc4444;cursor:pointer;">🗑️ Effacer tout</button>
+        <button onclick="triggerImport()" style="padding:0.72rem;background:var(--purple3);border:2px solid var(--purple);border-radius:var(--r2);font-family:'Nunito',sans-serif;font-size:0.8rem;font-weight:900;color:var(--purple2);cursor:pointer;">📥 Importer</button>
       </div>
+      <input type="file" id="importFile" accept=".json" style="display:none" onchange="importData(event)">
+      <button onclick="clearData()" style="width:100%;margin-top:0.6rem;padding:0.72rem;background:#fff0f0;border:2px solid #ffb3b3;border-radius:var(--r2);font-family:'Nunito',sans-serif;font-size:0.8rem;font-weight:900;color:#cc4444;cursor:pointer;">🗑️ Effacer tout</button>
     </div>
     <div class="card full" style="text-align:center;padding:1.4rem">
       <div style="font-size:2rem;margin-bottom:0.4rem">🌸</div>
-      <div style="font-family:'Fraunces',serif;font-size:1.1rem;color:var(--dark);margin-bottom:0.3rem">Popo v3.0</div>
+      <div style="font-family:'Fraunces',serif;font-size:1.1rem;color:var(--dark);margin-bottom:0.3rem">Popo v4.0</div>
       <div style="font-size:0.73rem;color:var(--mid);font-weight:700">100% privé — tes données restent sur ton téléphone 🔒</div>
     </div>
   </div>
@@ -437,11 +453,10 @@ input[type=date]{width:100%;padding:0.55rem 0.75rem;border:2px solid var(--pink3
 <nav class="tab-bar">
   <button class="tab-btn active" onclick="showPage('home')" id="tab-home"><span class="ti">🏠</span>Accueil</button>
   <button class="tab-btn" onclick="showPage('cal')" id="tab-cal"><span class="ti">📅</span>Calendrier</button>
-  <button class="tab-btn" onclick="showPage('charts')" id="tab-charts"><span class="ti">📈</span>Graphiques</button>
-  <button class="tab-btn" onclick="showPage('notifs')" id="tab-notifs"><span class="ti">🔔</span>Rappels</button>
+  <button class="tab-btn" onclick="showPage('ai')" id="tab-ai"><span class="ti">✨</span>Popo IA</button>
+  <button class="tab-btn" onclick="showPage('charts')" id="tab-charts"><span class="ti">📈</span>Stats</button>
   <button class="tab-btn" onclick="showPage('settings')" id="tab-settings"><span class="ti">⚙️</span>Réglages</button>
 </nav>
-
 <div class="toast" id="toast"></div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
@@ -451,14 +466,12 @@ const S={
   periodLength:parseInt(localStorage.getItem('periodLength')||'5'),
   lastPeriodDate:localStorage.getItem('lastPeriodDate')||null,
   loggedDays:JSON.parse(localStorage.getItem('loggedDays')||'{}'),
-  viewMonth:new Date().getMonth(),
-  viewYear:new Date().getFullYear(),
-  homeMonth:new Date().getMonth(),
-  homeYear:new Date().getFullYear(),
-  selectedFlow:'moyen',
-  selectedMood:null,
-  selectedEnergy:null,
-  selectedSymptoms:[],
+  dark:localStorage.getItem('darkMode')==='1',
+  apiKey:localStorage.getItem('apiKey')||'',
+  viewMonth:new Date().getMonth(),viewYear:new Date().getFullYear(),
+  homeMonth:new Date().getMonth(),homeYear:new Date().getFullYear(),
+  selectedFlow:'moyen',selectedMood:null,selectedEnergy:null,
+  aiHistory:[],
 };
 function save(){
   localStorage.setItem('cycleLength',S.cycleLength);
@@ -466,14 +479,28 @@ function save(){
   if(S.lastPeriodDate)localStorage.setItem('lastPeriodDate',S.lastPeriodDate);
   localStorage.setItem('loggedDays',JSON.stringify(S.loggedDays));
 }
+// DARK MODE
+function toggleDark(){S.dark=!S.dark;localStorage.setItem('darkMode',S.dark?'1':'0');applyDark();}
+function applyDark(){document.body.classList.toggle('dark',S.dark);document.getElementById('darkToggle').textContent=S.dark?'☀️':'🌙';}
+// NAV
+function showPage(n){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById('page-'+n).classList.add('active');
+  const tb=document.getElementById('tab-'+n);if(tb)tb.classList.add('active');
+  if(n==='charts')renderCharts();
+  if(n==='cal')renderCalendar();
+  if(n==='home'){renderHomeCalendar();renderDelayBanner();loadTodayLog();}
+  if(n==='ai'&&S.apiKey){document.getElementById('aiKeyBox').style.borderColor='var(--teal)';}
+}
+// UTILS
 function dk(d){return new Date(d).toISOString().split('T')[0];}
 function addDays(d,n){const r=new Date(d);r.setDate(r.getDate()+n);return r;}
 function getPhase(d){
   if(!S.lastPeriodDate)return null;
   const s=new Date(S.lastPeriodDate);s.setHours(0,0,0,0);
   const t=new Date(d);t.setHours(0,0,0,0);
-  const diff=Math.round((t-s)/86400000);
-  if(diff<0)return null;
+  const diff=Math.round((t-s)/86400000);if(diff<0)return null;
   const day=((diff%S.cycleLength)+S.cycleLength)%S.cycleLength+1;
   const ov=S.cycleLength-14;
   if(day<=S.periodLength)return'period';
@@ -487,162 +514,62 @@ function getPredicted(){
   for(let c=1;c<=3;c++)for(let d=0;d<S.periodLength;d++)s.add(dk(addDays(st,c*S.cycleLength+d)));
   return s;
 }
-function showPage(n){
-  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
-  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
-  document.getElementById('page-'+n).classList.add('active');
-  const tb=document.getElementById('tab-'+n);if(tb)tb.classList.add('active');
-  if(n==='charts')renderCharts();
-  if(n==='cal')renderCalendar();
-  if(n==='home'){renderHomeCalendar();renderDelayBanner();loadTodayLog();}
+const MONTHS=['Janvier','Février','Mars','Avril','Mai','Juin','Juillet','Août','Septembre','Octobre','Novembre','Décembre'];
+function buildCal(gridId,vm,vy,onDayClick){
+  const fd=new Date(vy,vm,1),dim=new Date(vy,vm+1,0).getDate(),sdow=(fd.getDay()+6)%7;
+  const today=new Date();today.setHours(0,0,0,0);
+  const pred=getPredicted();
+  const g=document.getElementById(gridId);g.innerHTML='';
+  ['L','M','M','J','V','S','D'].forEach(d=>{const e=document.createElement('div');e.className='cal-dn';e.textContent=d;g.appendChild(e);});
+  for(let i=0;i<sdow;i++){const e=document.createElement('div');e.className='cal-day empty';g.appendChild(e);}
+  for(let d=1;d<=dim;d++){
+    const date=new Date(vy,vm,d),key=dk(date),phase=getPhase(date);
+    const isLogged=!!S.loggedDays[key],isToday=date.getTime()===today.getTime(),isPred=pred.has(key);
+    const e=document.createElement('div');
+    let cls='cal-day';
+    if(isToday)cls+=' today';
+    if(isLogged||phase==='period')cls+=' period';
+    else if(isPred)cls+=' predicted';
+    else if(phase==='ovulation')cls+=' ovulation';
+    else if(phase==='fertile')cls+=' fertile';
+    e.className=cls;e.textContent=d;e.onclick=()=>onDayClick(key,vm,vy);g.appendChild(e);
+  }
 }
 function renderCalendar(){
-  const{viewMonth:vm,viewYear:vy}=S;
-  const fd=new Date(vy,vm,1),dim=new Date(vy,vm+1,0).getDate(),sdow=(fd.getDay()+6)%7;
-  const today=new Date();today.setHours(0,0,0,0);
-  const pred=getPredicted();
-  const months=['Janvier','Février','Mars','Avril','Mai','Juin','Juillet','Août','Septembre','Octobre','Novembre','Décembre'];
-  document.getElementById('calMonth').textContent=`${months[vm]} ${vy}`;
-  const g=document.getElementById('calGrid');g.innerHTML='';
-  ['L','M','M','J','V','S','D'].forEach(d=>{const e=document.createElement('div');e.className='cal-dn';e.textContent=d;g.appendChild(e);});
-  for(let i=0;i<sdow;i++){const e=document.createElement('div');e.className='cal-day empty';g.appendChild(e);}
-  for(let d=1;d<=dim;d++){
-    const date=new Date(vy,vm,d),key=dk(date),phase=getPhase(date);
-    const isLogged=!!S.loggedDays[key],isToday=date.getTime()===today.getTime(),isPred=pred.has(key);
-    const e=document.createElement('div');
-    let cls='cal-day';
-    if(isToday)cls+=' today';
-    if(isLogged||phase==='period')cls+=' period';
-    else if(isPred)cls+=' predicted';
-    else if(phase==='ovulation')cls+=' ovulation';
-    else if(phase==='fertile')cls+=' fertile';
-    e.className=cls;e.textContent=d;e.onclick=()=>toggleDay(key);g.appendChild(e);
-  }
-}
-function toggleDay(key){
-  if(S.loggedDays[key])delete S.loggedDays[key];
-  else{
-    S.loggedDays[key]={flow:'moyen'};
-    if(!S.lastPeriodDate||key<S.lastPeriodDate){S.lastPeriodDate=key;document.getElementById('lastPeriodDate').value=key;}
-  }
-  save();renderCalendar();renderHomeCalendar();renderPhase();renderStats();renderDelayBanner();
-}
-function changeMonth(dir){
-  S.viewMonth+=dir;
-  if(S.viewMonth>11){S.viewMonth=0;S.viewYear++;}
-  if(S.viewMonth<0){S.viewMonth=11;S.viewYear--;}
-  renderCalendar();
-}
-function changeHomeMonth(dir){
-  S.homeMonth+=dir;
-  if(S.homeMonth>11){S.homeMonth=0;S.homeYear++;}
-  if(S.homeMonth<0){S.homeMonth=11;S.homeYear--;}
-  renderHomeCalendar();
+  document.getElementById('calMonth').textContent=`${MONTHS[S.viewMonth]} ${S.viewYear}`;
+  buildCal('calGrid',S.viewMonth,S.viewYear,(key)=>toggleDay(key));
 }
 function renderHomeCalendar(){
-  const vm=S.homeMonth,vy=S.homeYear;
-  const fd=new Date(vy,vm,1),dim=new Date(vy,vm+1,0).getDate(),sdow=(fd.getDay()+6)%7;
-  const today=new Date();today.setHours(0,0,0,0);
-  const pred=getPredicted();
-  const months=['Janvier','Février','Mars','Avril','Mai','Juin','Juillet','Août','Septembre','Octobre','Novembre','Décembre'];
-  document.getElementById('homeCalMonth').textContent=`${months[vm]} ${vy}`;
-  const g=document.getElementById('homeCalGrid');g.innerHTML='';
-  ['L','M','M','J','V','S','D'].forEach(d=>{const e=document.createElement('div');e.className='cal-dn';e.textContent=d;g.appendChild(e);});
-  for(let i=0;i<sdow;i++){const e=document.createElement('div');e.className='cal-day empty';g.appendChild(e);}
-  for(let d=1;d<=dim;d++){
-    const date=new Date(vy,vm,d),key=dk(date),phase=getPhase(date);
-    const isLogged=!!S.loggedDays[key],isToday=date.getTime()===today.getTime(),isPred=pred.has(key);
-    const e=document.createElement('div');
-    let cls='cal-day';
-    if(isToday)cls+=' today';
-    if(isLogged||phase==='period')cls+=' period';
-    else if(isPred)cls+=' predicted';
-    else if(phase==='ovulation')cls+=' ovulation';
-    else if(phase==='fertile')cls+=' fertile';
-    if(isLogged&&S.loggedDays[key]?.mood)cls+=' has-log';
-    e.className=cls;e.textContent=d;
-    e.onclick=()=>{
-      // Navigate to cal tab if clicking a day
-      if(isToday){window.scrollTo(0,0);}
-      else{S.viewMonth=vm;S.viewYear=vy;showPage('cal');renderCalendar();}
-    };
-    g.appendChild(e);
-  }
+  document.getElementById('homeCalMonth').textContent=`${MONTHS[S.homeMonth]} ${S.homeYear}`;
+  buildCal('homeCalGrid',S.homeMonth,S.homeYear,(key,vm,vy)=>{S.viewMonth=vm;S.viewYear=vy;showPage('cal');});
 }
+function changeMonth(dir){S.viewMonth+=dir;if(S.viewMonth>11){S.viewMonth=0;S.viewYear++;}if(S.viewMonth<0){S.viewMonth=11;S.viewYear--;}renderCalendar();}
+function changeHomeMonth(dir){S.homeMonth+=dir;if(S.homeMonth>11){S.homeMonth=0;S.homeYear++;}if(S.homeMonth<0){S.homeMonth=11;S.homeYear--;}renderHomeCalendar();}
+function toggleDay(key){
+  if(S.loggedDays[key])delete S.loggedDays[key];
+  else{S.loggedDays[key]={flow:'moyen'};if(!S.lastPeriodDate||key<S.lastPeriodDate){S.lastPeriodDate=key;document.getElementById('lastPeriodDate').value=key;}}
+  save();renderCalendar();renderHomeCalendar();renderPhase();renderStats();renderDelayBanner();
+}
+// DELAY BANNER
 function renderDelayBanner(){
   const banner=document.getElementById('delayBanner');
-  const sub=document.getElementById('delayBannerSub');
   if(!S.lastPeriodDate){banner.style.display='none';return;}
   const today=new Date();today.setHours(0,0,0,0);
   const st=new Date(S.lastPeriodDate);st.setHours(0,0,0,0);
-  const diff=Math.round((today-st)/86400000);
-  const dayInCycle=((diff%S.cycleLength)+S.cycleLength)%S.cycleLength+1;
-  // Check if we're past expected period start (day 1 of next cycle)
-  const daysLate=diff-S.cycleLength*(Math.floor(diff/S.cycleLength));
-  const overdue=diff>=S.cycleLength&&dayInCycle<=S.periodLength;
-  const reallyLate=diff>=S.cycleLength&&dayInCycle>S.periodLength&&dayInCycle<=7;
-  // Show banner if past expected date and no recent period logged
-  const nextPeriodStart=addDays(st,S.cycleLength);
-  const isLate=today>nextPeriodStart;
-  const recentLog=Object.keys(S.loggedDays).some(k=>{const d=new Date(k);return d>=nextPeriodStart&&d<=today;});
+  const nextStart=addDays(st,S.cycleLength);
+  const isLate=today>nextStart;
+  const recentLog=Object.keys(S.loggedDays).some(k=>{const d=new Date(k);return d>=nextStart&&d<=today;});
   if(isLate&&!recentLog){
-    const dLate=Math.round((today-nextPeriodStart)/86400000);
-    sub.textContent=`Prévues il y a ${dLate} jour${dLate>1?'s':''} — tout va bien ? 💛`;
+    const dLate=Math.round((today-nextStart)/86400000);
+    document.getElementById('delayBannerSub').textContent=`Prévues il y a ${dLate} jour${dLate>1?'s':''} — tout va bien ? 💛`;
     banner.style.display='flex';
-  }else{
-    banner.style.display='none';
-  }
+  }else{banner.style.display='none';}
 }
-function loadTodayLog(){
-  const key=dk(new Date());
-  const day=S.loggedDays[key];
-  if(!day)return;
-  // Restore flow
-  if(day.flow){
-    document.querySelectorAll('.flow-btn').forEach(b=>{
-      if(b.textContent.toLowerCase().includes(day.flow)){b.classList.add('active');}
-    });
-    S.selectedFlow=day.flow;
-  }
-  // Restore mood
-  if(day.mood){
-    document.querySelectorAll('.mood-row:first-of-type .mood-btn, #page-home .mood-row').forEach(b=>{
-      if(b.dataset.mood===day.mood){b.classList.add('active');}
-    });
-    S.selectedMood=day.mood;
-  }
-  // Restore note
-  if(day.note){const n=document.getElementById('noteToday');if(n)n.value=day.note;}
-}
-function logToday(){
-  const today=new Date(),key=dk(today);
-  const activeMood=document.querySelector('#page-home .mood-row .mood-btn.active');
-  const activeEnergy=document.querySelector('#energyRow .mood-btn.active');
-  const activeSymptoms=[...document.querySelectorAll('.sym-btn.ap,.sym-btn.apu,.sym-btn.at,.sym-btn.ao')].map(b=>b.textContent.trim());
-  const note=document.getElementById('noteToday')?.value||'';
-  S.loggedDays[key]={
-    flow:S.selectedFlow||'moyen',
-    mood:activeMood?activeMood.dataset.mood:null,
-    energy:activeEnergy?activeEnergy.dataset.energy:null,
-    symptoms:activeSymptoms,
-    note:note,
-  };
-  if(!S.lastPeriodDate||key<S.lastPeriodDate){
-    S.lastPeriodDate=key;
-    const el=document.getElementById('lastPeriodDate');
-    if(el)el.value=key;
-  }
-  save();renderCalendar();renderHomeCalendar();renderPhase();renderStats();renderDelayBanner();showToast('✅ Journée enregistrée !');
-}
+// PHASE
 function renderPhase(){
   const today=new Date();today.setHours(0,0,0,0);
   const phase=getPhase(today);
-  const phases={
-    period:{badge:'🩸 Règles',name:'Phase menstruelle',desc:'Prends soin de toi 💕'},
-    fertile:{badge:'🌱 Fertile',name:'Phase fertile',desc:'Énergie montante ✨'},
-    ovulation:{badge:'✨ Ovulation',name:'Jour d\'ovulation !',desc:'Tu es au sommet 🔥'},
-    normal:{badge:'🌙 Lutéale',name:'Phase lutéale',desc:'Écoute ton corps 🧘'},
-  };
+  const phases={period:{badge:'🩸 Règles',name:'Phase menstruelle',desc:'Prends soin de toi 💕'},fertile:{badge:'🌱 Fertile',name:'Phase fertile',desc:'Énergie montante ✨'},ovulation:{badge:'✨ Ovulation',name:'Jour d\'ovulation !',desc:'Tu es au sommet 🔥'},normal:{badge:'🌙 Lutéale',name:'Phase lutéale',desc:'Écoute ton corps 🧘'}};
   const info=phase?phases[phase]:{badge:'🌷 Bienvenue',name:'Popo t\'accueille !',desc:'Configure ton cycle ⚙️'};
   document.getElementById('phaseBadge').textContent=info.badge;
   document.getElementById('phaseName').textContent=info.name;
@@ -669,37 +596,121 @@ function renderStats(){
     document.getElementById('nextDate').textContent=next.toLocaleDateString('fr-FR',{day:'numeric',month:'long',year:'numeric'});
   }
 }
-function logPeriod(){
+// LOG
+function loadTodayLog(){
+  const key=dk(new Date()),day=S.loggedDays[key];
+  document.querySelectorAll('.flow-btn,.mood-btn').forEach(b=>b.classList.remove('active'));
+  if(!day)return;
+  if(day.flow){S.selectedFlow=day.flow;document.querySelectorAll('.flow-btn').forEach(b=>{if(b.textContent.toLowerCase().includes(day.flow))b.classList.add('active');});}
+  if(day.mood){document.querySelectorAll('#page-home .mood-row .mood-btn').forEach(b=>{if(b.dataset.mood===day.mood)b.classList.add('active');});}
+  if(day.energy){document.querySelectorAll('#energyRow .mood-btn').forEach(b=>{if(b.dataset.energy===day.energy)b.classList.add('active');});}
+  if(day.note){const n=document.getElementById('noteToday');if(n)n.value=day.note;}
+}
+function logToday(){
   const today=new Date(),key=dk(today);
-  S.loggedDays[key]={flow:'moyen'};
-  if(!S.lastPeriodDate||key<S.lastPeriodDate){S.lastPeriodDate=key;document.getElementById('lastPeriodDate').value=key;}
-  save();renderCalendar();renderPhase();renderStats();showToast('✅ Journée enregistrée !');
+  const activeMood=document.querySelector('#page-home .card .mood-row .mood-btn.active');
+  const activeEnergy=document.querySelector('#energyRow .mood-btn.active');
+  const activeSymptoms=[...document.querySelectorAll('#page-home .sym-btn.ap,#page-home .sym-btn.apu,#page-home .sym-btn.at,#page-home .sym-btn.ao')].map(b=>b.textContent.replace(/\s+/g,' ').trim());
+  const note=document.getElementById('noteToday')?.value||'';
+  S.loggedDays[key]={flow:S.selectedFlow||'moyen',mood:activeMood?activeMood.dataset.mood:null,energy:activeEnergy?activeEnergy.dataset.energy:null,symptoms:activeSymptoms,note};
+  if(!S.lastPeriodDate||key<S.lastPeriodDate){S.lastPeriodDate=key;const el=document.getElementById('lastPeriodDate');if(el)el.value=key;}
+  save();renderCalendar();renderHomeCalendar();renderPhase();renderStats();renderDelayBanner();showToast('✅ Journée enregistrée !');
 }
 function selectFlow(btn,flow){document.querySelectorAll('.flow-btn').forEach(b=>b.classList.remove('active'));btn.classList.add('active');S.selectedFlow=flow;}
-function selMood(btn){const r=btn.closest('.mood-row');r.querySelectorAll('.mood-btn').forEach(b=>b.classList.remove('active'));btn.classList.add('active');S.selectedMood=btn.dataset.mood;}
-function selEnergy(btn){const r=btn.closest('.mood-row');r.querySelectorAll('.mood-btn').forEach(b=>b.classList.remove('active'));btn.classList.add('active');S.selectedEnergy=btn.dataset.energy;}
-function tSym(btn,cls){
-  const all=['ap','apu','at','ao'];
-  const has=all.some(c=>btn.classList.contains(c));
-  all.forEach(c=>btn.classList.remove(c));
-  if(!has)btn.classList.add(cls);
-}
-function saveNote(v){const key=dk(new Date());S.loggedDays[key]=S.loggedDays[key]||{};S.loggedDays[key].note=v;save();}function updCycle(v){S.cycleLength=parseInt(v);document.getElementById('clv').textContent=v+'j';save();renderPhase();renderStats();}
-function updPeriod(v){S.periodLength=parseInt(v);document.getElementById('plv').textContent=v+'j';save();renderCalendar();renderPhase();renderStats();}
-function updLastDate(v){S.lastPeriodDate=v;save();renderCalendar();renderPhase();renderStats();}
+function selMood(btn){const r=btn.closest('.mood-row');r.querySelectorAll('.mood-btn').forEach(b=>b.classList.remove('active'));btn.classList.add('active');}
+function selEnergy(btn){const r=btn.closest('.mood-row');r.querySelectorAll('.mood-btn').forEach(b=>b.classList.remove('active'));btn.classList.add('active');}
+function tSym(btn,cls){const all=['ap','apu','at','ao'];const has=all.some(c=>btn.classList.contains(c));all.forEach(c=>btn.classList.remove(c));if(!has)btn.classList.add(cls);}
+function saveNote(v){const key=dk(new Date());S.loggedDays[key]=S.loggedDays[key]||{};S.loggedDays[key].note=v;save();}
+// SETTINGS
+function updCycle(v){S.cycleLength=parseInt(v);document.getElementById('clv').textContent=v+'j';save();renderPhase();renderStats();}
+function updPeriod(v){S.periodLength=parseInt(v);document.getElementById('plv').textContent=v+'j';save();renderCalendar();renderHomeCalendar();renderPhase();renderStats();}
+function updLastDate(v){S.lastPeriodDate=v;save();renderCalendar();renderHomeCalendar();renderPhase();renderStats();renderDelayBanner();}
+// EXPORT / IMPORT
 function exportData(){
   const data=JSON.stringify({cycleLength:S.cycleLength,periodLength:S.periodLength,lastPeriodDate:S.lastPeriodDate,loggedDays:S.loggedDays},null,2);
-  const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([data],{type:'application/json'}));a.download='popo-data.json';a.click();
-  showToast('📤 Données exportées !');
+  const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([data],{type:'application/json'}));a.download='popo-data.json';a.click();showToast('📤 Données exportées !');
+}
+function triggerImport(){document.getElementById('importFile').click();}
+function importData(event){
+  const file=event.target.files[0];if(!file)return;
+  const reader=new FileReader();
+  reader.onload=e=>{
+    try{
+      const d=JSON.parse(e.target.result);
+      if(d.cycleLength)S.cycleLength=d.cycleLength;if(d.periodLength)S.periodLength=d.periodLength;
+      if(d.lastPeriodDate)S.lastPeriodDate=d.lastPeriodDate;if(d.loggedDays)S.loggedDays=d.loggedDays;
+      save();
+      document.getElementById('cycleLength').value=S.cycleLength;document.getElementById('periodLength').value=S.periodLength;
+      document.getElementById('clv').textContent=S.cycleLength+'j';document.getElementById('plv').textContent=S.periodLength+'j';
+      if(S.lastPeriodDate)document.getElementById('lastPeriodDate').value=S.lastPeriodDate;
+      renderCalendar();renderHomeCalendar();renderPhase();renderStats();renderDelayBanner();showToast('✅ Données importées !');
+    }catch(err){showToast('❌ Fichier invalide');}
+  };reader.readAsText(file);
 }
 function clearData(){if(confirm('Effacer toutes les données ?')){localStorage.clear();location.reload();}}
-function showToast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2500);}
+// NOTIFS
 async function askNotifPerm(){
   if(!('Notification'in window)){showToast('❌ Non supporté');return;}
   const p=await Notification.requestPermission();
   if(p==='granted'){showToast('✅ Notifications activées !');new Notification('Popo 🌸',{body:'Les rappels sont actifs !',icon:'icon-192.png'});}
   else showToast('❌ Permission refusée');
 }
+// IA
+function saveApiKey(){
+  const val=document.getElementById('apiKeyInput').value.trim();
+  if(!val.startsWith('sk-ant-')){showToast('❌ Clé invalide — doit commencer par sk-ant-');return;}
+  S.apiKey=val;localStorage.setItem('apiKey',val);
+  showToast('✅ Clé API sauvegardée !');
+  document.getElementById('aiKeyBox').style.borderColor='var(--teal)';
+}
+function buildCycleCtx(){
+  const today=new Date();today.setHours(0,0,0,0);
+  const phase=getPhase(today);
+  const phaseNames={period:'menstruelle (règles en cours)',fertile:'fertile',ovulation:'ovulation (aujourd\'hui !)',normal:'lutéale'};
+  const recent=Object.entries(S.loggedDays).sort((a,b)=>b[0].localeCompare(a[0])).slice(0,7);
+  let ctx=`Tu es Popo, une assistante bienveillante et experte en cycle menstruel. Tu réponds toujours en français, avec chaleur et bienveillance. Tu n'es pas médecin mais tu donnes des informations générales utiles sur le cycle et le bien-être féminin.
+
+DONNÉES CYCLE :
+- Durée cycle : ${S.cycleLength} jours | Durée règles : ${S.periodLength} jours
+- Phase actuelle : ${phase?phaseNames[phase]:'inconnue (configurer les réglages)'}
+- Dernier 1er jour : ${S.lastPeriodDate||'non renseigné'}`;
+  if(recent.length){
+    ctx+=`\n\nENTRÉES RÉCENTES :`;
+    recent.forEach(([date,d])=>{ctx+=`\n- ${date}: flux ${d.flow||'?'}${d.mood?` humeur ${d.mood}`:''}${d.symptoms?.length?` symptômes: ${d.symptoms.join(', ')}`:''}${d.note?` note: "${d.note}"`:''}`;});
+  }
+  ctx+=`\n\nRéponds de manière personnalisée en tenant compte de ces données.`;
+  return ctx;
+}
+async function sendAI(){
+  const input=document.getElementById('aiInput');
+  const msg=input.value.trim();if(!msg)return;
+  if(!S.apiKey){showToast('❌ Entre ta clé API d\'abord !');document.getElementById('apiKeyInput').focus();return;}
+  input.value='';
+  addMsg(msg,'user');
+  const thinking=addMsg('Popo réfléchit... 🌸','assistant thinking');
+  S.aiHistory.push({role:'user',content:msg});
+  try{
+    const res=await fetch('https://api.anthropic.com/v1/messages',{
+      method:'POST',
+      headers:{'Content-Type':'application/json','x-api-key':S.apiKey,'anthropic-version':'2023-06-01','anthropic-dangerous-direct-browser-access':'true'},
+      body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:600,system:buildCycleCtx(),messages:S.aiHistory})
+    });
+    const data=await res.json();
+    thinking.remove();
+    if(data.error){addMsg('❌ '+data.error.message,'assistant');return;}
+    const reply=data.content[0].text;
+    S.aiHistory.push({role:'assistant',content:reply});
+    addMsg(reply,'assistant');
+    if(S.aiHistory.length>20)S.aiHistory=S.aiHistory.slice(-16);
+  }catch(e){thinking.remove();addMsg('❌ Erreur de connexion. Vérifie ta clé API.','assistant');}
+}
+function addMsg(text,cls){
+  const chat=document.getElementById('aiChat');
+  const div=document.createElement('div');div.className='ai-msg '+cls;div.textContent=text;
+  chat.appendChild(div);chat.scrollTop=chat.scrollHeight;return div;
+}
+function sendSuggestion(txt){document.getElementById('aiInput').value=txt;sendAI();}
+// CHARTS
 let cc=null,cs=null;
 function renderCharts(){
   renderHistory();
@@ -709,7 +720,11 @@ function renderCharts(){
   cc=new Chart(ctx1,{type:'bar',data:{labels:dur.map((_,i)=>`C${i+1}`),datasets:[{label:'Jours',data:dur,backgroundColor:dur.map(v=>v<25?'rgba(255,159,28,0.75)':v>32?'rgba(199,125,255,0.75)':'rgba(255,107,157,0.75)'),borderColor:dur.map(v=>v<25?'#ff9f1c':v>32?'#9b5de5':'#ff4081'),borderWidth:2,borderRadius:8}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{min:20,max:35,grid:{color:'rgba(155,122,168,0.1)'},ticks:{font:{family:'Nunito',weight:'700'},color:'#9b7aa8'}},x:{grid:{display:false},ticks:{font:{family:'Nunito',weight:'700'},color:'#9b7aa8'}}}}});
   const ctx2=document.getElementById('chartSymptoms').getContext('2d');
   if(cs)cs.destroy();
-  cs=new Chart(ctx2,{type:'doughnut',data:{labels:['Crampes','Fatigue','Nausées','Ballonnements','Fringales','Anxiété'],datasets:[{data:[4,7,2,5,6,3],backgroundColor:['rgba(255,64,129,0.8)','rgba(155,93,229,0.8)','rgba(6,214,160,0.8)','rgba(255,159,28,0.8)','rgba(255,214,109,0.9)','rgba(0,180,216,0.8)'],borderWidth:0}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'right',labels:{font:{family:'Nunito',weight:'700',size:10},color:'#5c3d66',boxWidth:10}}}}});
+  const symCount={};
+  Object.values(S.loggedDays).forEach(d=>{(d.symptoms||[]).forEach(s=>{const k=s.replace(/[^\wÀ-ÿ\s]/g,'').trim();if(k)symCount[k]=(symCount[k]||0)+1;});});
+  const labels=Object.keys(symCount).slice(0,6);const vals=labels.map(l=>symCount[l]);
+  if(!labels.length){labels.push('Crampes','Fatigue','Nausées');vals.push(0,0,0);}
+  cs=new Chart(ctx2,{type:'doughnut',data:{labels,datasets:[{data:vals,backgroundColor:['rgba(255,64,129,0.8)','rgba(155,93,229,0.8)','rgba(6,214,160,0.8)','rgba(255,159,28,0.8)','rgba(255,214,109,0.9)','rgba(0,180,216,0.8)'],borderWidth:0}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'right',labels:{font:{family:'Nunito',weight:'700',size:10},color:'#5c3d66',boxWidth:10}}}}});
 }
 function renderHistory(){
   const list=document.getElementById('historyList');
@@ -717,19 +732,18 @@ function renderHistory(){
   if(!keys.length){list.innerHTML='<div style="text-align:center;color:var(--mid);font-size:0.83rem;font-weight:700;padding:1rem">Aucune donnée pour l\'instant 🌱</div>';return;}
   list.innerHTML=keys.map(k=>{
     const d=new Date(k),label=d.toLocaleDateString('fr-FR',{weekday:'short',day:'numeric',month:'short'});
-    const entry=S.loggedDays[k];
-    const flow=entry?.flow||'—';
-    const mood=entry?.mood?` · ${entry.mood}`:'';
-    const syms=entry?.symptoms?.length?` · ${entry.symptoms.slice(0,2).join(', ')}`:'';
+    const entry=S.loggedDays[k];const flow=entry?.flow||'—';
+    const mood=entry?.mood?` · ${entry.mood}`:'';const syms=entry?.symptoms?.length?` · ${entry.symptoms.slice(0,2).join(', ')}`:'';
     return`<div class="history-item"><div class="hdot"></div><div class="hinfo"><div class="hdate">${label}</div><div class="hsub">Flux : ${flow}${mood}${syms}</div></div><div style="font-size:1.1rem">🩸</div></div>`;
   }).join('');
 }
-// Init
-document.getElementById('cycleLength').value=S.cycleLength;
-document.getElementById('periodLength').value=S.periodLength;
-document.getElementById('clv').textContent=S.cycleLength+'j';
-document.getElementById('plv').textContent=S.periodLength+'j';
+function showToast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2500);}
+// INIT
+applyDark();
+document.getElementById('cycleLength').value=S.cycleLength;document.getElementById('periodLength').value=S.periodLength;
+document.getElementById('clv').textContent=S.cycleLength+'j';document.getElementById('plv').textContent=S.periodLength+'j';
 if(S.lastPeriodDate)document.getElementById('lastPeriodDate').value=S.lastPeriodDate;
+if(S.apiKey)document.getElementById('apiKeyInput').value='••••••••'+S.apiKey.slice(-4);
 renderCalendar();renderHomeCalendar();renderPhase();renderStats();renderDelayBanner();loadTodayLog();
 if('serviceWorker'in navigator)navigator.serviceWorker.register('/sw.js').catch(()=>{});
 </script>
